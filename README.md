@@ -30,7 +30,7 @@ octorepl --host your-github-enterprise-host.example.com
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/octorepl.
+Bug reports and pull requests are welcome on GitHub at https://github.com/aereal/octorepl.
 
 ## License
 
