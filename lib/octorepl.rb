@@ -58,12 +58,6 @@ module Octorepl
         end
       end
 
-      if ! config.verify_ssl?
-        Octokit.configure do |c|
-          c.connection_options = { ssl: { verify: false } }
-        end
-      end
-
       login        = config.user
       access_token = config.token
       @octokit = Octokit::Client.new(login: login, access_token: access_token)
@@ -76,6 +70,10 @@ module Octorepl
       o.on('-h', '--host HOST') {|v| config.learn(:host, v) }
       o.on('--disable-ssl-verify') {|v| config.learn(:ssl_verify, !v) }
     }.parse!(argv)
+
+    if ! config.verify_ssl?
+      require 'octorepl/ssl_no_verify'
+    end
 
     hub_config = YAML.load_file(File.expand_path('~/.config/hub'))
     host_config = hub_config.fetch(config.host).first
